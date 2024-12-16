@@ -7,6 +7,8 @@ from pickle import load
 
 model=load(open('./models/decision_tree_classifier_default_42.sav','rb'))
 
+st.set_option("client.showErrorDetails", False)
+
 idioma = {"Español": "es"}
 outcome = {"0": "iris setosa", "1": "iris versicolor","2": "iris virginica"}
 
@@ -22,11 +24,12 @@ text_labels = {
     2. Ajuste los parámetros según sea necesario.
     3. Presione el botón "Predecir" para ver el resultado.
     """,
-    "sepal length (cm)": "sepal length (cm)",
-    "sepal width (cm)": "sepal width (cm)",
-    "petal length (cm)": "petal length (cm)",
-    "petal width (cm)": "petal width (cm)",
+    "sepal length (cm)": "Longitud de los sépalos (cm)",
+    "sepal width (cm)": "Anchura de los sépalos (cm)",
+    "petal length (cm)": "Longitud de los pétalos (cm)",
+    "petal width (cm)": "Anchura de los pétalos (cm)",
     "Resultado": "Resultado",
+    "success":"Toma nota:",
     "iris setosa": "iris setosa",
     "iris versicolor": "iris versicolor",
     "iris virginica": "iris virginica",
@@ -39,11 +42,11 @@ st.markdown(text_labels["instructions"])
 
 left, right = st.columns(2)
 with left:
-    sepal_length_cm = st.number_input(text_labels["sepal length (cm)"])
-    sepal_width_cm = st.number_input(text_labels["sepal width (cm)"])
+    sepal_length_cm = st.slider("Longitud de los sépalos (cm)", min_value=1,max_value=10,value=1)
+    sepal_width_cm = st.slider("Ancho de los sépalos (cm)", min_value=1,max_value=6,value=1)
 with right:
-    petal_length_cm = st.number_input(text_labels["petal length (cm)"])
-    petal_width_cm = st.number_input(text_labels["petal width (cm)"])
+    petal_length_cm = st.slider("Longitud de los pétalos (cm)", min_value=1,max_value=10,value=1)
+    petal_width_cm = st.slider("Ancho de los pétalos (cm)", min_value=1,max_value=4,value=1)
 
 if st.button(text_labels["Resultado"]):
     if not sepal_length_cm or not sepal_width_cm or not petal_length_cm or not petal_width_cm :
